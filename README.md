@@ -1,1 +1,0 @@
-# s10-algoritmos-y-estructuras-de-datos-repaso-examen-pc02
