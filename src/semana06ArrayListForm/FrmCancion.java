@@ -56,6 +56,14 @@ public class FrmCancion extends javax.swing.JFrame {
         }
         return false;
     }
+    
+    private boolean actualizarCancion(Cancion objetoDeCancion, int index) {
+        if (index >= 0 && index < canciones.size()) {
+            canciones.set(index, objetoDeCancion);
+            return true;
+        }
+        return false;
+    }
 
     private void buscarCancionListar(String valor, boolean f) {
         taResultado.setText("");
@@ -100,6 +108,7 @@ public class FrmCancion extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnBuscarT = new javax.swing.JButton();
         btnBuscarA = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -153,6 +162,13 @@ public class FrmCancion extends javax.swing.JFrame {
             }
         });
 
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -168,7 +184,7 @@ public class FrmCancion extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                             .addComponent(txtArtista))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jScrollPane1)
@@ -180,7 +196,8 @@ public class FrmCancion extends javax.swing.JFrame {
                         .addComponent(btnMostrar, javax.swing.GroupLayout.Alignment.TRAILING))
                     .addComponent(btnEliminar)
                     .addComponent(btnBuscarT)
-                    .addComponent(btnBuscarA))
+                    .addComponent(btnBuscarA)
+                    .addComponent(btnActualizar))
                 .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
@@ -205,9 +222,11 @@ public class FrmCancion extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnBuscarT)
                         .addGap(18, 18, 18)
-                        .addComponent(btnBuscarA))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addComponent(btnBuscarA)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnActualizar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         pack();
@@ -261,6 +280,16 @@ public class FrmCancion extends javax.swing.JFrame {
         buscarCancionListar(valor, bus);
     }//GEN-LAST:event_btnBuscarAActionPerformed
 
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        int index = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la posición de la canción a actualizar:"));
+        if (actualizarCancion(new Cancion(txtTitulo.getText().strip(), txtArtista.getText().strip()),index-1)) {
+            JOptionPane.showMessageDialog(null, "Se actualizo la canción con posición "+index);
+            listarCanciones();
+        } else {
+            JOptionPane.showMessageDialog(null, "No se actualizo la canción.");
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -297,6 +326,7 @@ public class FrmCancion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBuscarA;
     private javax.swing.JButton btnBuscarT;
